@@ -117,14 +117,26 @@ Keep responses concise since you're on WhatsApp — no one wants to read
 an essay in a chat bubble. Use plain language, avoid jargon unless asked.
 ```
 
-### 5. Disable WhatsApp on primary (if migrating it to the new user)
+### 5. Migrate or disable WhatsApp on primary (if applicable)
 
-If you're moving WhatsApp from your primary instance to the new user, disable it on primary first:
+If the new user is taking over WhatsApp from your primary instance:
 
 ```bash
+# 1. Stop primary gateway first
+systemctl --user stop hermes-gateway
+
+# 2. Copy existing WhatsApp session to avoid re-pairing
+cp -r ~/.hermes/whatsapp/session/* "$HERMES_NEW/whatsapp/session/"
+
+# 3. Disable WhatsApp on primary
 # In ~/.hermes/.env, set:
 WHATSAPP_ENABLED=false
+
+# 4. Restart primary
+systemctl --user start hermes-gateway
 ```
+
+If both users will have their own WhatsApp connections, skip the copy and just pair each one separately (step 8).
 
 ### 6. Create a systemd service
 
