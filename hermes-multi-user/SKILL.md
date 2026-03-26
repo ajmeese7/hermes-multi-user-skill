@@ -188,10 +188,21 @@ systemctl --user start hermes-<name>-gateway
 ### 8. Pair WhatsApp (if applicable)
 
 ```bash
+# Stop the service first (bridge can't pair while gateway owns it)
+systemctl --user stop hermes-<name>-gateway
+
 HERMES_HOME=~/.hermes-<name> hermes whatsapp
 ```
 
-Scan the QR code from the new user's phone.
+Scan the QR code from the new user's phone. After pairing succeeds, start the service:
+
+```bash
+systemctl --user start hermes-<name>-gateway
+```
+
+The service is `enabled`, so it will auto-start on boot going forward — this manual start is only needed after the initial pairing.
+
+**Important:** `WHATSAPP_ALLOWED_USERS` in `.env` must use bare country+number format without a `+` prefix (e.g. `11234567890`, not `+11234567890`).
 
 ## CLI Access
 
