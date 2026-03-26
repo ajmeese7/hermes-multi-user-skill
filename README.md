@@ -49,7 +49,7 @@ All instances share the same hermes-agent codebase but are completely isolated i
 
 ## Blog Post
 
-For a full walkthrough of how this was built, see: *[Coming soon — Medium article]*
+For a full walkthrough of how this was built, see: [How I Set Up Multi-User AI Agents with Hermes (And You Can Too)](https://blog.aaronmeese.com/how-i-set-up-multi-user-ai-agents-with-hermes-and-you-can-too-648b52fe20e9)
 
 ## License
 
