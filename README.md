@@ -7,8 +7,10 @@ Run separate agents for family members, coworkers, or different personas — eac
 ## Install
 
 ```bash
-hermes skills install ajmeese7/hermes-multi-user-skill/hermes-multi-user
+hermes skills install ajmeese7/hermes-multi-user-skill/hermes-multi-user --force
 ```
+
+> **Why `--force`?** The built-in security scanner flags this skill as dangerous because it references `.env` files, `.bashrc`, and systemd services — which is exactly what a multi-user setup skill needs to do. Review the [SKILL.md](hermes-multi-user/SKILL.md) yourself before installing if you'd like to verify there's nothing malicious.
 
 ## What it does
 
