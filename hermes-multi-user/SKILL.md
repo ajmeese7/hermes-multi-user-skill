@@ -262,11 +262,14 @@ def get_custom_skills(hermes_home: Path) -> set[str]:
 ## Pitfalls
 
 1. **WhatsApp port conflicts** — each agent using WhatsApp MUST have a different `bridge_port` value, or they'll fail to bind
-2. **Don't symlink skills/ directories between agents** — skills created by one agent would bleed into the other
-3. **Docker sandboxing recommended for secondary users** — prevents the agent from accessing the primary user's files or other system resources
-4. **Session data is NOT shared** — each agent has completely independent memory, sessions, and conversation history
-5. **API key costs are shared** — all instances use the same API keys from .env, so usage bills to the same account
-6. **Restart after config changes** — `systemctl --user restart hermes-<name>-gateway` to pick up config.yaml or .env changes
+2. **Don't copy WhatsApp sessions between agents** — copied sessions go stale quickly. WhatsApp will show the device as "offline" even though the bridge health endpoint reports "connected". Always do a fresh pairing for each agent.
+3. **Don't use `hermes gateway install` if you have a custom service** — it creates a new service with a hash suffix that conflicts with your manually created one
+4. **Don't symlink skills/ directories between agents** — skills created by one agent would bleed into the other
+5. **Docker sandboxing recommended for secondary users** — prevents the agent from accessing the primary user's files or other system resources
+6. **Session data is NOT shared** — each agent has completely independent memory, sessions, and conversation history
+7. **API key costs are shared** — all instances use the same API keys from .env, so usage bills to the same account
+8. **Restart after config changes** — `systemctl --user restart hermes-<name>-gateway` to pick up config.yaml or .env changes
+9. **Cron jobs for secondary agents** — the `cronjob` tool only targets the primary agent. For secondary agents, write jobs directly to `~/.hermes-<name>/cron/jobs.json` and restart the gateway
 
 ## Verification
 
