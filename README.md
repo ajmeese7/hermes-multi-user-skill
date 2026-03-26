@@ -7,7 +7,7 @@ Run separate agents for family members, coworkers, or different personas — eac
 ## Install
 
 ```bash
-hermes skills install ajmeese7/hermes-multi-user-skill
+hermes skills install ajmeese7/hermes-multi-user-skill/hermes-multi-user
 ```
 
 ## What it does
